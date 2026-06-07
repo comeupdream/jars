@@ -145,6 +145,8 @@ window.JARS_CONTENT = {
     doom: {
       title: "DOOMAID.exe", icon: "🔫", x: 160, y: 70, w: 360,
       body: `
+        <img src="assets/game-art.png" alt="" style="width:100%;border:2px solid #000;margin-bottom:6px"
+             onerror="this.style.display='none'">
         <p class="kicker">WASD move · mouse/←→ turn · SPACE/click shoot</p>
         <p style="font-size:12px;margin:4px 0">blast the kool-aid men. grab jars. survive.</p>
         <canvas id="doom-canvas" width="320" height="200"
@@ -158,7 +160,8 @@ window.JARS_CONTENT = {
       body: `
         <div style="text-align:center">
           <p class="glitch huge" data-text="OH YEAH">OH YEAH</p>
-          <img src="assets/koolaid-man.svg" alt="" style="width:120px;margin:8px auto">
+          <img src="assets/koolaid-man.png" alt="" style="width:120px;margin:8px auto"
+               onerror="this.onerror=null;this.src='assets/koolaid-man.svg'">
           <div class="slot" style="margin:8px 0">[ cursed gif / secret drop ]</div>
           <p style="font-size:12px">secret target = your call (discount? discord? lore?)</p>
         </div>`,

@@ -49,6 +49,20 @@
   display: flex; flex-direction: column; gap: 18px;
 }
 .boot-log { white-space: pre-wrap; line-height: 1.45; text-shadow: 0 0 6px #3aff0066; }
+.boot-hero {
+  display: block; margin: auto; max-width: min(80vw, 720px); max-height: 55vh;
+  object-fit: contain;
+  image-rendering: auto;
+  animation: hero-slam .5s cubic-bezier(.2,1.6,.4,1) both;
+  filter: drop-shadow(0 0 24px rgba(255,45,85,.5));
+}
+@keyframes hero-slam {
+  0%   { transform: scale(.2) rotate(-8deg); opacity: 0; }
+  60%  { transform: scale(1.08) rotate(2deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); }
+}
+@media (prefers-reduced-motion: reduce) { .boot-hero { animation: none; } }
+
 .boot-bar { margin-top: auto; max-width: 520px; }
 .boot-bar__label { font-weight: bold; color: var(--pine); font-family: "MS Sans Serif", sans-serif; }
 .boot-bar__track {

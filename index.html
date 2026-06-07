@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>JARS // KOOLAID PINEAPPLE SPEARS</title>
 <meta name="description" content="IT'S JUST PINEAPPLE. IN KOOLAID. IN A JAR." />
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link rel="apple-touch-icon" href="assets/favicon.png" />
 <link rel="stylesheet" href="css/reset.css" />
 <link rel="stylesheet" href="css/os.css" />
 <link rel="stylesheet" href="css/fx.css" />
@@ -17,6 +19,8 @@
   <!-- ===== BOOT / POST SCREEN ===== -->
   <div id="boot" class="boot">
     <pre id="boot-log" class="boot-log"></pre>
+    <img id="boot-hero" class="boot-hero" src="assets/hero.png" alt="" hidden
+         onerror="this.style.display='none'" />
     <div class="boot-bar" id="boot-bar" hidden>
       <div class="boot-bar__label">JARSOS</div>
       <div class="boot-bar__track"><div class="boot-bar__fill" id="boot-fill"></div></div>
@@ -61,7 +65,8 @@
   <!-- ===== MASCOT (purple kool-aid man helper) ===== -->
   <div id="mascot" class="mascot" hidden>
     <div class="mascot__bubble" id="mascot-bubble"></div>
-    <img class="mascot__img" src="assets/koolaid-man.svg" alt="Purple Kool-Aid Man" />
+    <img class="mascot__img" src="assets/koolaid-man.png" alt="Kool-Aid Man"
+         onerror="this.onerror=null;this.src='assets/koolaid-man.svg'" />
   </div>
 
   <script src="js/fx.js"></script>

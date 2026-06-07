@@ -23,6 +23,7 @@
         setTimeout(type, reduce ? 60 : 220 + Math.random() * 160);
       } else {
         const bar = $("#boot-bar"); bar.hidden = false;
+        const hero = $("#boot-hero"); if (hero) hero.hidden = false;
         let p = 0;
         const fill = $("#boot-fill");
         const t = setInterval(() => {
