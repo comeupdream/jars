@@ -23,14 +23,43 @@
         setTimeout(type, reduce ? 60 : 220 + Math.random() * 160);
       } else {
         const bar = $("#boot-bar"); bar.hidden = false;
-        const hero = $("#boot-hero"); if (hero) hero.hidden = false;
-        let p = 0;
+        const hero = $("#boot-hero");
+        const stage = $("#boot-stage");
+        const vid = $("#boot-video");
+
+        // loading bar is eye-candy now; the intro video drives the handoff
+        let p = 0, advanced = false;
         const fill = $("#boot-fill");
         const t = setInterval(() => {
           p += 4 + Math.random() * 12; if (p > 100) p = 100;
           fill.style.width = p + "%";
-          if (p >= 100) { clearInterval(t); setTimeout(startDesktop, 400); }
+          if (p >= 100) clearInterval(t);
         }, reduce ? 30 : 120);
+
+        const go = () => { if (advanced) return; advanced = true; clearInterval(t); startDesktop(); };
+
+        // once the Kool-Aid Man drops to his final position, play the video
+        // ONCE with the heavy wavy CRT effect, then enter the desktop.
+        const playIntro = () => {
+          if (!vid) { setTimeout(go, 1000); return; }
+          if (hero) hero.hidden = true;
+          vid.hidden = false;
+          if (stage) stage.classList.add("is-playing");
+          vid.loop = false;
+          vid.addEventListener("ended", go, { once: true });
+          vid.addEventListener("error", () => setTimeout(go, 800), { once: true });
+          const pr = vid.play();
+          if (pr && pr.catch) pr.catch(() => setTimeout(go, 1500));
+          setTimeout(go, 14000); // safety net so the intro can never hang
+        };
+
+        if (hero) {
+          hero.hidden = false;
+          if (reduce) setTimeout(playIntro, 300);           // slam disabled under reduced-motion
+          else hero.addEventListener("animationend", playIntro, { once: true });
+        } else {
+          playIntro();
+        }
       }
     })();
   }

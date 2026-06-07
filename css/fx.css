@@ -49,9 +49,21 @@
   display: flex; flex-direction: column; gap: 18px;
 }
 .boot-log { white-space: pre-wrap; line-height: 1.45; text-shadow: 0 0 6px #3aff0066; }
-.boot-hero {
-  display: block; margin: auto; max-width: min(80vw, 720px); max-height: 55vh;
+.svg-defs { position: absolute; pointer-events: none; }
+
+/* stage stacks the static hero + the video in the same spot */
+.boot-stage {
+  flex: 1; position: relative;
+  display: grid; place-items: center;
+  width: 100%; overflow: hidden;
+}
+.boot-hero, .boot-video {
+  grid-area: 1 / 1;
+  max-width: min(80vw, 760px); max-height: 60vh;
   object-fit: contain;
+}
+.boot-hero {
+  display: block;
   image-rendering: auto;
   animation: hero-slam .5s cubic-bezier(.2,1.6,.4,1) both;
   filter: drop-shadow(0 0 24px rgba(255,45,85,.5));
@@ -61,7 +73,34 @@
   60%  { transform: scale(1.08) rotate(2deg); opacity: 1; }
   100% { transform: scale(1) rotate(0); }
 }
-@media (prefers-reduced-motion: reduce) { .boot-hero { animation: none; } }
+
+/* ---- heavy wavy CRT video ---- */
+.boot-video {
+  width: 100%; height: auto;
+  filter: url(#crtwave) saturate(1.4) contrast(1.18) brightness(1.05);
+  animation: crt-wobble .18s steps(2, jump-none) infinite;
+}
+@keyframes crt-wobble {
+  0%   { transform: translateX(-2px) skewX(-.7deg); }
+  50%  { transform: translateX(2px)  skewX(.7deg); }
+  100% { transform: translateX(-2px) skewX(-.7deg); }
+}
+/* rolling CRT scan band over the playing video */
+.boot-stage.is-playing::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to bottom,
+    transparent 46%, rgba(255,255,255,.10) 49%,
+    rgba(255,255,255,.22) 50%, rgba(255,255,255,.10) 51%, transparent 54%);
+  mix-blend-mode: screen;
+  animation: crt-rollband 3s linear infinite;
+}
+@keyframes crt-rollband { from { transform: translateY(-110%); } to { transform: translateY(110%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-hero { animation: none; }
+  .boot-video { animation: none; filter: saturate(1.2) contrast(1.1); }
+  .boot-stage.is-playing::after { animation: none; }
+}
 
 .boot-bar { margin-top: auto; max-width: 520px; }
 .boot-bar__label { font-weight: bold; color: var(--pine); font-family: "MS Sans Serif", sans-serif; }

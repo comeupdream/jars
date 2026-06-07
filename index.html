@@ -19,14 +19,31 @@
   <!-- ===== BOOT / POST SCREEN ===== -->
   <div id="boot" class="boot">
     <pre id="boot-log" class="boot-log"></pre>
-    <img id="boot-hero" class="boot-hero" src="assets/rainbowkool.jpg" alt="" hidden
-         onerror="this.style.display='none'" />
+    <div id="boot-stage" class="boot-stage">
+      <img id="boot-hero" class="boot-hero" src="assets/rainbowkool.jpg" alt="" hidden
+           onerror="this.style.display='none'" />
+      <video id="boot-video" class="boot-video" muted playsinline preload="auto" hidden>
+        <source src="assets/koolaid-man.mp4" type="video/mp4" />
+      </video>
+    </div>
     <div class="boot-bar" id="boot-bar" hidden>
       <div class="boot-bar__label">JARSOS</div>
       <div class="boot-bar__track"><div class="boot-bar__fill" id="boot-fill"></div></div>
       <div class="boot-bar__hint">do not turn off your jar</div>
     </div>
   </div>
+
+  <!-- heavy wavy CRT displacement filter for the intro video -->
+  <svg class="svg-defs" width="0" height="0" aria-hidden="true">
+    <filter id="crtwave">
+      <feTurbulence type="fractalNoise" baseFrequency="0 0.02" numOctaves="2" seed="7" result="noise">
+        <animate attributeName="baseFrequency" dur="5s" values="0 0.012; 0.005 0.035; 0 0.012" repeatCount="indefinite" />
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="G">
+        <animate attributeName="scale" dur="2.4s" values="12;30;12" repeatCount="indefinite" />
+      </feDisplacementMap>
+    </filter>
+  </svg>
 
   <!-- ===== DESKTOP ===== -->
   <main id="desktop" class="desktop" hidden>
