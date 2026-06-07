@@ -196,6 +196,37 @@
 @keyframes mascot-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @media (prefers-reduced-motion: reduce) { .mascot { animation: none; } }
 
+/* ---------- VERSION BADGE (obvious, top-right) ---------- */
+.version-badge {
+  position: fixed; top: 8px; right: 8px; z-index: 10001;
+  display: flex; align-items: center; gap: 6px; pointer-events: none;
+  font-family: "Courier New", monospace; font-size: 12px; font-weight: bold;
+  letter-spacing: 1px; padding: 4px 9px;
+  background: #000; color: var(--lime);
+  border: 2px solid var(--lime);
+  box-shadow: 0 0 10px rgba(182,255,0,.55);
+  animation: vb-blink 1.2s steps(2, jump-none) infinite;
+}
+.version-badge__v   { color: #fff; }
+.version-badge__num { color: var(--pine); font-size: 14px; }
+.version-badge__b   { color: var(--punch); }
+@keyframes vb-blink { 50% { box-shadow: 0 0 20px rgba(182,255,0,1); } }
+.version-pop {
+  position: absolute; right: 6px; top: 100%; margin-top: 2px;
+  color: var(--lime); font-size: 22px; font-weight: 900;
+  text-shadow: 0 0 8px rgba(182,255,0,.8); opacity: 0;
+}
+.version-pop.go { animation: vb-pop 1.6s ease-out forwards; }
+@keyframes vb-pop {
+  0%   { opacity: 0; transform: translateY(0) scale(.4); }
+  20%  { opacity: 1; transform: translateY(-8px) scale(1.3); }
+  100% { opacity: 0; transform: translateY(-34px) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .version-badge { animation: none; }
+  .version-pop.go { animation-duration: .3s; }
+}
+
 /* placeholder media slot */
 .slot {
   display: grid; place-items: center;
