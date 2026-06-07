@@ -26,6 +26,7 @@ window.JARS_CONTENT = {
   marquee: [
     "KOOL-AID IN A JAR",
     "EVERY FLAVOR",
+    "$JARS CA: HJ4LhZwi4uro4ZFnsk4PBroCJz2KnEs8NwRhowoxpump",
     "IT'S JUST PINEAPPLE",
     "IN A JAR",
     "OH YEAH",
@@ -54,6 +55,7 @@ window.JARS_CONTENT = {
     { id: "sweeper",  glyph: "💣", label: "Jarsweeper" },
     { id: "doom",     glyph: "🔫", label: "DOOMAID.exe" },
     { id: "gallery",  glyph: "🖼️", label: "gallery" },
+    { id: "cursors",  glyph: "🖱️", label: "Custom Cursor" },
     { id: "secret",   glyph: "🚫", label: "do_not_open" },
   ],
 
@@ -63,6 +65,7 @@ window.JARS_CONTENT = {
     { gl: "🌈", label: "Flavors", open: "flavors" },
     { gl: "ℹ️", label: "Info", open: "info" },
     { gl: "🖼️", label: "Gallery", open: "gallery" },
+    { gl: "🖱️", label: "Custom Cursor", open: "cursors" },
     { sep: true },
     { gl: "💣", label: "Jarsweeper", open: "sweeper" },
     { gl: "🔫", label: "DOOMAID", open: "doom" },
@@ -80,6 +83,9 @@ window.JARS_CONTENT = {
         </div>
         <button class="btn-loud ca-copy" style="width:100%"
           data-copy="HJ4LhZwi4uro4ZFnsk4PBroCJz2KnEs8NwRhowoxpump">📋 COPY ADDRESS</button>
+        <a class="btn-loud ca-buy" style="width:100%;margin-top:8px;text-align:center;display:block;text-decoration:none"
+          href="https://pump.fun/coin/HJ4LhZwi4uro4ZFnsk4PBroCJz2KnEs8NwRhowoxpump"
+          target="_blank" rel="noopener noreferrer">🚀 BUY ON PUMP.FUN</a>
         <p style="text-align:center;font-size:11px;margin-top:8px;color:#555">pump.fun · OH YEAH</p>`,
     },
 
@@ -167,6 +173,15 @@ window.JARS_CONTENT = {
           style="width:100%;background:#000;border:2px solid #000;image-rendering:pixelated;cursor:crosshair"></canvas>
         <p style="font-size:12px;margin-top:6px">jars: <b id="doom-jars">0</b> · hp: <b id="doom-hp">100</b></p>`,
       onOpen: "initDoom",
+    },
+
+    cursors: {
+      title: "Custom Cursor", icon: "🖱️", x: 280, y: 110, w: 340,
+      body: `
+        <p class="kicker">pick your pointer</p>
+        <div id="cursor-grid" class="cursor-grid"></div>
+        <p style="font-size:11px;color:#555;margin-top:8px">saved automatically 🟣</p>`,
+      onOpen: "initCursors",
     },
 
     secret: {

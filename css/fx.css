@@ -244,6 +244,23 @@
   .version-pop.go { animation-duration: .3s; }
 }
 
+/* ---------- CUSTOM CURSOR APP ---------- */
+.cursor-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px;
+}
+.cursor-option {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 8px 4px; background: #fff; color: #000; font-size: 11px;
+  border: 2px solid; border-color: var(--gray-dd) var(--hi) var(--hi) var(--gray-dd);
+}
+.cursor-option.active {
+  background: var(--pine); font-weight: bold;
+  border-color: var(--hi) var(--gray-dd) var(--gray-dd) var(--hi);
+}
+.cursor-option__pic { height: 42px; display: grid; place-items: center; }
+.cursor-option__pic svg { height: 38px; width: auto; }
+.cursor-option__name { text-align: center; line-height: 1.1; }
+
 /* ---------- CONTRACT ADDRESS (glowing purple) ---------- */
 .ca-text {
   display: block;
