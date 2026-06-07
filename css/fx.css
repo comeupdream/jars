@@ -244,6 +244,30 @@
   .version-pop.go { animation-duration: .3s; }
 }
 
+/* ---------- CONTRACT ADDRESS (glowing purple) ---------- */
+.ca-text {
+  display: block;
+  font-family: "Courier New", monospace;
+  font-weight: 900;
+  font-size: clamp(13px, 2.4vw, 19px);
+  letter-spacing: .5px;
+  word-break: break-all; line-height: 1.4;
+  color: #d39bff;
+  text-shadow:
+    0 0 4px #b14dff, 0 0 10px #b14dff,
+    0 0 20px #9b30ff, 0 0 38px #7b2ff7;
+  animation: ca-glow 1.4s ease-in-out infinite alternate;
+}
+@keyframes ca-glow {
+  from { text-shadow: 0 0 4px #b14dff, 0 0 10px #b14dff, 0 0 20px #9b30ff, 0 0 38px #7b2ff7; }
+  to   { text-shadow: 0 0 8px #e0b3ff, 0 0 18px #c77dff, 0 0 34px #b14dff, 0 0 60px #9b30ff; }
+}
+.ca-copy {
+  background: var(--berry) !important;
+  box-shadow: 4px 4px 0 #000, 0 0 16px #9b30ff;
+}
+@media (prefers-reduced-motion: reduce) { .ca-text { animation: none; } }
+
 /* placeholder media slot */
 .slot {
   display: grid; place-items: center;

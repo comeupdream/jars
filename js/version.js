@@ -5,7 +5,7 @@
    exactly what's live.
    ============================================================ */
 (function () {
-  var BUILD = 2;                       // <-- +1 every push
+  var BUILD = 3;                       // <-- +1 every push
   var VERSION = "v0." + BUILD;
   var COMMIT = window.JARS_COMMIT || "local";
   var BUILT = window.JARS_BUILT || "dev";

@@ -74,8 +74,9 @@
     tickClock();
     setInterval(tickClock, 1000);
     initMascot();
-    // open a window so it doesn't feel empty
+    // open windows so it doesn't feel empty; CA popup opens last (on top, centered)
     openWindow("readme");
+    openWindow("ca");
   }
 
   /* ---------------- DESKTOP ICONS ---------------- */
@@ -144,9 +145,10 @@
     if (open.has(id)) { focusWin(id); restore(id); return; }
 
     const win = el("div", "win");
-    win.style.left = (def.x || 80) + "px";
-    win.style.top = (def.y || 80) + "px";
     if (def.w) win.style.width = def.w + "px";
+    const cx = def.center ? Math.max(8, (innerWidth - (def.w || 320)) / 2) : (def.x || 80);
+    win.style.left = cx + "px";
+    win.style.top = (def.y || 80) + "px";
     win.innerHTML = `
       <div class="win__bar">
         <span class="win__icon">${def.icon || "🪟"}</span>
@@ -230,6 +232,30 @@
       b.addEventListener("click", (e) => { const r = b.getBoundingClientRect(); window.FX && FX.burst(r.left + r.width / 2, r.top); }));
     win.querySelectorAll("[data-secret]").forEach((a) =>
       a.addEventListener("click", (e) => { e.preventDefault(); openWindow("secret"); }));
+    win.querySelectorAll("[data-copy]").forEach((b) =>
+      b.addEventListener("click", () => {
+        const text = b.getAttribute("data-copy");
+        copyText(text);
+        const old = b.textContent;
+        b.textContent = "✅ COPIED!";
+        setTimeout(() => { b.textContent = old; }, 1600);
+        const r = b.getBoundingClientRect();
+        window.FX && FX.burst(r.left + r.width / 2, r.top, 20);
+      }));
+  }
+
+  // clipboard copy with a fallback for non-secure / older contexts
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+    } else { fallbackCopy(text); }
+  }
+  function fallbackCopy(text) {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand("copy"); } catch (e) {}
+    ta.remove();
   }
 
   /* ---------------- TASKBAR EXTRAS ---------------- */

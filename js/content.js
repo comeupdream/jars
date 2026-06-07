@@ -46,6 +46,7 @@ window.JARS_CONTENT = {
   ],
 
   icons: [
+    { id: "ca",       glyph: "🟣", label: "$JARS CA" },
     { id: "readme",   glyph: "📄", label: "READ_ME.txt" },
     { id: "product",  glyph: "🫙", label: "JARS" },
     { id: "flavors",  glyph: "🌈", label: "FLAVORS" },
@@ -57,6 +58,7 @@ window.JARS_CONTENT = {
   ],
 
   start: [
+    { gl: "🟣", label: "$JARS Contract Address", open: "ca" },
     { gl: "🫙", label: "JARS", open: "product" },
     { gl: "🌈", label: "Flavors", open: "flavors" },
     { gl: "ℹ️", label: "Info", open: "info" },
@@ -69,6 +71,18 @@ window.JARS_CONTENT = {
   ],
 
   windows: {
+    ca: {
+      title: "★ OFFICIAL CONTRACT ADDRESS ★", icon: "🟣", center: true, y: 96, w: 480,
+      body: `
+        <p class="kicker" style="text-align:center">JARS // CONTRACT ADDRESS (CA)</p>
+        <div class="sunken" style="text-align:center;margin:10px 0">
+          <code class="ca-text" id="ca-text">HJ4LhZwi4uro4ZFnsk4PBroCJz2KnEs8NwRhowoxpump</code>
+        </div>
+        <button class="btn-loud ca-copy" style="width:100%"
+          data-copy="HJ4LhZwi4uro4ZFnsk4PBroCJz2KnEs8NwRhowoxpump">📋 COPY ADDRESS</button>
+        <p style="text-align:center;font-size:11px;margin-top:8px;color:#555">pump.fun · OH YEAH</p>`,
+    },
+
     readme: {
       title: "READ_ME.txt — Notepad", icon: "📄", x: 50, y: 60, w: 340,
       body: `
