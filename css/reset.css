@@ -1,0 +1,14 @@
+/* tiny reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; width: 100%; overflow: hidden; }
+body {
+  font-family: "MS Sans Serif", Tahoma, Geneva, Verdana, sans-serif;
+  background: #000;
+  color: #fff;
+  -webkit-font-smoothing: none;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='28' viewBox='0 0 20 28'%3E%3Cpath d='M2 2 L2 22 L7 17 L11 26 L14 25 L10 16 L17 16 Z' fill='%23fff' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") 2 2, auto;
+  user-select: none;
+}
+button { font-family: inherit; cursor: inherit; }
+img { display: block; max-width: 100%; }
+::selection { background: var(--punch); color: #fff; }

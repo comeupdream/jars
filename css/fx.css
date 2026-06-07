@@ -1,0 +1,148 @@
+/* ============================================================
+   FX  —  CRT, scanlines, glitch type, marquee, boot screen
+   ============================================================ */
+
+#fx-bg {
+  position: fixed; inset: 0; z-index: 0;
+  display: block;
+}
+
+/* ---------- CRT OVERLAY ---------- */
+.crt {
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  /* scanlines */
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,.22) 0px,
+      rgba(0,0,0,.22) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  mix-blend-mode: multiply;
+  animation: crt-flicker 6s infinite steps(60);
+}
+.crt::after {
+  /* vignette + slight tint */
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(120% 120% at 50% 50%, transparent 55%, rgba(0,0,0,.55) 100%);
+  mix-blend-mode: normal;
+}
+@keyframes crt-flicker {
+  0%,100% { opacity: 1; }
+  50% { opacity: .94; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .crt { animation: none; }
+}
+
+/* ---------- BOOT / POST ---------- */
+.boot {
+  position: fixed; inset: 0; z-index: 9000;
+  background: #000;
+  color: #b6ff00;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.boot-log { white-space: pre-wrap; line-height: 1.45; text-shadow: 0 0 6px #3aff0066; }
+.boot-bar { margin-top: auto; max-width: 520px; }
+.boot-bar__label { font-weight: bold; color: var(--pine); font-family: "MS Sans Serif", sans-serif; }
+.boot-bar__track {
+  height: 18px; margin: 6px 0;
+  border: 2px solid #fff; background: #111; padding: 2px;
+}
+.boot-bar__fill {
+  height: 100%; width: 0%;
+  background: repeating-linear-gradient(90deg, var(--pine) 0 10px, #000 10px 12px);
+  transition: width .12s linear;
+}
+.boot-bar__hint { color: #888; font-size: 12px; font-family: "MS Sans Serif", sans-serif; }
+
+.boot.is-bsod {
+  background: #0000aa; color: #fff;
+  font-family: "Lucida Console", monospace;
+  justify-content: center; align-items: center; text-align: center;
+}
+
+/* ---------- MARQUEE ---------- */
+.marquee {
+  position: absolute; top: 50%; left: 0; right: 0;
+  transform: translateY(-50%) rotate(-4deg);
+  overflow: hidden;
+  z-index: 1; pointer-events: none;
+  opacity: .9;
+}
+.marquee__track {
+  display: inline-flex; white-space: nowrap;
+  font-weight: 900; font-style: italic;
+  font-size: clamp(40px, 12vw, 150px);
+  -webkit-text-stroke: 2px #000;
+  color: var(--pine);
+  text-shadow: 6px 6px 0 var(--punch);
+  animation: scroll-x 18s linear infinite;
+}
+.marquee__track span { padding: 0 .4em; }
+@keyframes scroll-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
+}
+
+/* ---------- GLITCH TEXT (utility) ---------- */
+.glitch {
+  position: relative; display: inline-block;
+  font-weight: 900; text-transform: uppercase;
+}
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute; left: 0; top: 0; width: 100%;
+}
+.glitch::before { color: var(--cyan); transform: translate(-2px,0); clip-path: inset(0 0 55% 0); animation: gl 2.5s infinite linear alternate; }
+.glitch::after  { color: var(--punch); transform: translate(2px,0);  clip-path: inset(55% 0 0 0); animation: gl 1.8s infinite linear alternate-reverse; }
+@keyframes gl {
+  0% { transform: translate(-2px,0); } 50% { transform: translate(2px,-1px); } 100% { transform: translate(-1px,1px); }
+}
+
+/* loud type helpers */
+.huge { font-size: clamp(28px, 6vw, 64px); font-weight: 900; line-height: .95; text-transform: uppercase; color: #000; }
+.kicker { color: var(--punch); font-weight: 900; letter-spacing: 3px; font-size: 12px; text-transform: uppercase; }
+
+/* ---------- MASCOT (purple kool-aid man) ---------- */
+.mascot {
+  position: fixed; right: 14px; bottom: calc(var(--taskbar-h) + 12px);
+  z-index: 70; width: 96px;
+  animation: mascot-bob 3s ease-in-out infinite;
+}
+.mascot__img { width: 96px; filter: drop-shadow(3px 4px 0 rgba(0,0,0,.5)); }
+.mascot:active { transform: scale(.95); }
+.mascot__bubble {
+  position: absolute; bottom: 100%; right: 0; margin-bottom: 8px;
+  width: max-content; max-width: 220px;
+  background: #fff; color: #000; border: 2px solid #000;
+  box-shadow: 3px 3px 0 var(--berry);
+  padding: 8px 10px; font-size: 12px; font-weight: bold;
+  opacity: 0; transform: translateY(6px) scale(.96); pointer-events: none;
+  transition: opacity .15s, transform .15s;
+}
+.mascot__bubble.show { opacity: 1; transform: translateY(0) scale(1); }
+.mascot__bubble::after {
+  content: ""; position: absolute; top: 100%; right: 24px;
+  border: 8px solid transparent; border-top-color: #000;
+}
+@keyframes mascot-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@media (prefers-reduced-motion: reduce) { .mascot { animation: none; } }
+
+/* placeholder media slot */
+.slot {
+  display: grid; place-items: center;
+  min-height: 140px;
+  border: 3px dashed var(--berry);
+  background: repeating-linear-gradient(45deg, #eee 0 12px, #ddd 12px 24px);
+  color: var(--gray-dd); font-size: 12px; text-align: center; padding: 12px;
+}

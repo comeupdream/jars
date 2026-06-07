@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220" role="img" aria-label="Purple Kool-Aid Man mascot">
+  <defs>
+    <radialGradient id="grape" cx="38%" cy="32%" r="75%">
+      <stop offset="0" stop-color="#a45cff"/>
+      <stop offset=".6" stop-color="#7b2ff7"/>
+      <stop offset="1" stop-color="#4a128f"/>
+    </radialGradient>
+    <linearGradient id="liq" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9b51ff"/>
+      <stop offset="1" stop-color="#5b1fb0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- jar body -->
+  <rect x="34" y="40" width="132" height="150" rx="22" fill="url(#grape)" stroke="#2a0a52" stroke-width="6"/>
+  <!-- glass shine -->
+  <rect x="46" y="54" width="20" height="120" rx="10" fill="#ffffff" opacity=".22"/>
+  <!-- lid -->
+  <rect x="44" y="22" width="112" height="26" rx="8" fill="#3a0d6e" stroke="#2a0a52" stroke-width="5"/>
+  <rect x="44" y="22" width="112" height="9"  rx="4" fill="#5a2a9c"/>
+
+  <!-- liquid line -->
+  <path d="M40 96 q60 -16 120 0 v82 q-60 16 -120 0 z" fill="url(#liq)" opacity=".55"/>
+
+  <!-- face -->
+  <g>
+    <!-- eyes -->
+    <ellipse cx="78" cy="104" rx="16" ry="20" fill="#fff"/>
+    <ellipse cx="122" cy="104" rx="16" ry="20" fill="#fff"/>
+    <circle cx="80" cy="108" r="8" fill="#1a0033"/>
+    <circle cx="120" cy="108" r="8" fill="#1a0033"/>
+    <circle cx="83" cy="105" r="3" fill="#fff"/>
+    <circle cx="123" cy="105" r="3" fill="#fff"/>
+    <!-- big OH YEAH mouth -->
+    <ellipse cx="100" cy="150" rx="30" ry="26" fill="#2a0a52"/>
+    <ellipse cx="100" cy="156" rx="18" ry="13" fill="#c98bff"/>
+  </g>
+
+  <!-- little arms -->
+  <rect x="6"  y="120" width="34" height="16" rx="8" fill="url(#grape)" stroke="#2a0a52" stroke-width="4"/>
+  <rect x="160" y="120" width="34" height="16" rx="8" fill="url(#grape)" stroke="#2a0a52" stroke-width="4"/>
+</svg>

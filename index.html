@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>JARS // KOOLAID PINEAPPLE SPEARS</title>
+<meta name="description" content="IT'S JUST PINEAPPLE. IN KOOLAID. IN A JAR." />
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/os.css" />
+<link rel="stylesheet" href="css/fx.css" />
+</head>
+<body>
+
+  <!-- ===== PROCEDURAL FX (canvas, behind everything) ===== -->
+  <canvas id="fx-bg" aria-hidden="true"></canvas>
+
+  <!-- ===== BOOT / POST SCREEN ===== -->
+  <div id="boot" class="boot">
+    <pre id="boot-log" class="boot-log"></pre>
+    <div class="boot-bar" id="boot-bar" hidden>
+      <div class="boot-bar__label">JARSOS</div>
+      <div class="boot-bar__track"><div class="boot-bar__fill" id="boot-fill"></div></div>
+      <div class="boot-bar__hint">do not turn off your jar</div>
+    </div>
+  </div>
+
+  <!-- ===== DESKTOP ===== -->
+  <main id="desktop" class="desktop" hidden>
+    <div id="desktop-icons" class="desktop-icons"></div>
+
+    <!-- giant looping hype marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" id="marquee-track"></div>
+    </div>
+
+    <!-- windows get injected here -->
+    <div id="window-layer" class="window-layer"></div>
+  </main>
+
+  <!-- ===== START MENU ===== -->
+  <div id="start-menu" class="start-menu" hidden>
+    <div class="start-menu__rail">JARS<span>OS</span></div>
+    <ul class="start-menu__list" id="start-list"></ul>
+  </div>
+
+  <!-- ===== TASKBAR ===== -->
+  <footer id="taskbar" class="taskbar" hidden>
+    <button id="start-btn" class="start-btn">
+      <span class="start-btn__logo">▦</span> START
+    </button>
+    <div id="tasks" class="tasks"></div>
+    <div class="tray">
+      <span id="tray-sip" class="tray__sip" title="sips remaining">🥤</span>
+      <span id="clock" class="clock">--:--</span>
+    </div>
+  </footer>
+
+  <!-- ===== CRT OVERLAY (scanlines + vignette, pure CSS) ===== -->
+  <div class="crt" aria-hidden="true"></div>
+
+  <!-- ===== MASCOT (purple kool-aid man helper) ===== -->
+  <div id="mascot" class="mascot" hidden>
+    <div class="mascot__bubble" id="mascot-bubble"></div>
+    <img class="mascot__img" src="assets/koolaid-man.svg" alt="Purple Kool-Aid Man" />
+  </div>
+
+  <script src="js/fx.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/games.js"></script>
+  <script src="js/os.js"></script>
+</body>
+</html>

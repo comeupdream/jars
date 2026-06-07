@@ -1,0 +1,194 @@
+/* ============================================================
+   JARSOS  —  fake desktop chrome  (95/98 bevels x XP accents, no rules)
+   All loud colors live here as variables so we can recolor to
+   match the REAL koolaid liquid the moment we have it.
+   ============================================================ */
+:root {
+  /* tropical brand palette (placeholder — swap to real liquid color) */
+  --pine:   #ffd60a;   /* pineapple yellow */
+  --pine-2: #ff9e00;   /* amber */
+  --punch:  #ff2d55;   /* koolaid punch red */
+  --berry:  #7b2ff7;   /* secret berry */
+  --cyan:   #00e5ff;   /* pop accent */
+  --lime:   #b6ff00;
+
+  /* os chrome */
+  --gray:   #c3c3c3;
+  --gray-d: #808080;
+  --gray-dd:#404040;
+  --face:   #d4d0c8;
+  --hi:     #ffffff;
+  --lo:     #87837c;
+  --title:  linear-gradient(90deg, var(--berry), var(--punch));
+  --title-off: linear-gradient(90deg, #6d6d6d, #9a9a9a);
+
+  --taskbar-h: 40px;
+}
+
+/* ---------- DESKTOP ---------- */
+.desktop {
+  position: fixed;
+  inset: 0 0 var(--taskbar-h) 0;
+  overflow: hidden;
+}
+
+.desktop-icons {
+  position: absolute;
+  top: 14px; left: 14px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(6, 92px);
+  gap: 6px 18px;
+  z-index: 2;
+}
+.dicon {
+  width: 84px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  background: none; border: 1px solid transparent;
+  color: #fff; padding: 6px 2px;
+  text-align: center;
+}
+.dicon:focus, .dicon:hover { border: 1px dotted #fff; background: rgba(0,0,229,.25); }
+.dicon__glyph {
+  font-size: 30px; line-height: 1;
+  filter: drop-shadow(2px 2px 0 rgba(0,0,0,.6));
+}
+.dicon__label {
+  font-size: 11px;
+  text-shadow: 1px 1px 0 #000;
+  word-break: break-word;
+}
+
+/* ---------- WINDOWS ---------- */
+.window-layer { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.win {
+  position: absolute;
+  min-width: 220px;
+  background: var(--face);
+  border: 2px solid;
+  border-color: var(--hi) var(--gray-dd) var(--gray-dd) var(--hi);
+  box-shadow: 1px 1px 0 #000, 6px 6px 0 rgba(0,0,0,.35);
+  color: #000;
+  pointer-events: auto;
+  display: flex; flex-direction: column;
+}
+.win.is-focused { box-shadow: 1px 1px 0 #000, 8px 8px 0 var(--punch); }
+.win__bar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 3px 4px;
+  background: var(--title-off);
+  color: #fff;
+  font-weight: bold; font-size: 12px;
+  cursor: grab;
+}
+.win.is-focused .win__bar { background: var(--title); }
+.win__bar:active { cursor: grabbing; }
+.win__icon { font-size: 13px; }
+.win__title { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.win__btns { display: flex; gap: 2px; }
+.win__btn {
+  width: 18px; height: 16px;
+  background: var(--face);
+  border: 2px solid;
+  border-color: var(--hi) var(--gray-dd) var(--gray-dd) var(--hi);
+  font-size: 10px; line-height: 1; color: #000;
+  display: grid; place-items: center;
+}
+.win__btn:active { border-color: var(--gray-dd) var(--hi) var(--hi) var(--gray-dd); }
+.win__body {
+  padding: 12px;
+  font-size: 13px; line-height: 1.5;
+  overflow: auto;
+  flex: 1;
+}
+.win.is-min { display: none; }
+
+/* sunken content panel like old apps */
+.sunken {
+  background: #fff;
+  border: 2px solid;
+  border-color: var(--gray-dd) var(--hi) var(--hi) var(--gray-dd);
+  padding: 10px;
+}
+
+/* big dumb pit-viper button */
+.btn-loud {
+  display: inline-block;
+  background: var(--punch);
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  font-size: 15px;
+}
+.btn-loud:active { transform: translate(4px,4px); box-shadow: 0 0 0 #000; }
+
+/* ---------- TASKBAR ---------- */
+.taskbar {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  height: var(--taskbar-h);
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 6px;
+  background: var(--face);
+  border-top: 2px solid var(--hi);
+  z-index: 50;
+}
+.start-btn {
+  display: flex; align-items: center; gap: 6px;
+  font-weight: 900; font-size: 14px; font-style: italic;
+  padding: 4px 12px;
+  background: var(--face);
+  border: 2px solid; border-color: var(--hi) var(--gray-dd) var(--gray-dd) var(--hi);
+  color: #000;
+  background-image: linear-gradient(180deg, var(--pine), var(--pine-2));
+}
+.start-btn.is-open, .start-btn:active { border-color: var(--gray-dd) var(--hi) var(--hi) var(--gray-dd); }
+.start-btn__logo { color: var(--berry); font-style: normal; }
+
+.tasks { flex: 1; display: flex; gap: 4px; overflow: hidden; }
+.task {
+  max-width: 180px; flex: 0 1 160px;
+  display: flex; align-items: center; gap: 6px;
+  padding: 3px 8px; font-size: 12px;
+  background: var(--face); color: #000;
+  border: 2px solid; border-color: var(--hi) var(--gray-dd) var(--gray-dd) var(--hi);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.task.is-active { border-color: var(--gray-dd) var(--hi) var(--hi) var(--gray-dd); font-weight: bold; background: #cfcbc4; }
+
+.tray {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 10px;
+  border: 2px solid; border-color: var(--gray-dd) var(--hi) var(--hi) var(--gray-dd);
+  font-size: 12px; color: #000;
+}
+.tray__sip { cursor: pointer; }
+.clock { font-variant-numeric: tabular-nums; }
+
+/* ---------- START MENU ---------- */
+.start-menu {
+  position: fixed; bottom: var(--taskbar-h); left: 6px;
+  width: 280px; z-index: 60;
+  background: var(--face);
+  border: 2px solid; border-color: var(--hi) var(--gray-dd) var(--gray-dd) var(--hi);
+  display: flex;
+  box-shadow: 4px 4px 0 rgba(0,0,0,.4);
+}
+.start-menu__rail {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  background: linear-gradient(0deg, var(--berry), var(--punch));
+  color: #fff; font-weight: 900; font-size: 22px; font-style: italic;
+  padding: 14px 8px; letter-spacing: 2px;
+}
+.start-menu__rail span { color: var(--pine); }
+.start-menu__list { flex: 1; list-style: none; padding: 4px; }
+.start-menu__list li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; font-size: 13px; color: #000;
+}
+.start-menu__list li:hover { background: var(--berry); color: #fff; }
+.start-menu__list li .gl { font-size: 18px; width: 20px; text-align: center; }
+.start-menu__sep { height: 2px; margin: 4px 2px; background: var(--gray-d); border-bottom: 1px solid var(--hi); }

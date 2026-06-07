@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" width="640" height="260" role="img" aria-label="JARS">
+  <defs>
+    <linearGradient id="juice" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd60a"/>
+      <stop offset=".55" stop-color="#ff9e00"/>
+      <stop offset="1" stop-color="#ff2d55"/>
+    </linearGradient>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/>
+      <feColorMatrix in="b" mode="matrix"
+        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10" result="g"/>
+      <feComposite in="SourceGraphic" in2="g" operator="atop"/>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="6" dy="8" stdDeviation="0" flood-color="#7b2ff7"/>
+    </filter>
+  </defs>
+
+  <!-- drips -->
+  <g filter="url(#goo)" fill="url(#juice)">
+    <rect x="92"  y="150" width="22" height="80" rx="11"/><circle cx="103" cy="232" r="14"/>
+    <rect x="250" y="150" width="20" height="58" rx="10"/><circle cx="260" cy="210" r="12"/>
+    <rect x="408" y="150" width="22" height="92" rx="11"/><circle cx="419" cy="246" r="15"/>
+    <rect x="556" y="150" width="18" height="44" rx="9"/><circle cx="565" cy="196" r="11"/>
+  </g>
+
+  <!-- wordmark -->
+  <text x="50%" y="150" text-anchor="middle"
+        font-family="Arial Black, Impact, sans-serif" font-size="180"
+        font-weight="900" font-style="italic"
+        fill="url(#juice)" stroke="#000" stroke-width="8" filter="url(#shadow)"
+        letter-spacing="2">JARS</text>
+
+  <!-- lid screw-threads accent -->
+  <g stroke="#000" stroke-width="6" stroke-linecap="round" opacity=".85">
+    <line x1="40" y1="40" x2="600" y2="40"/>
+    <line x1="40" y1="56" x2="600" y2="56"/>
+  </g>
+</svg>
