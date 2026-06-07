@@ -133,7 +133,12 @@
   z-index: 70; width: 96px;
   animation: mascot-bob 3s ease-in-out infinite;
 }
-.mascot__img { width: 96px; filter: drop-shadow(3px 4px 0 rgba(0,0,0,.5)); }
+.mascot__img {
+  width: 96px; height: 96px; object-fit: cover;
+  border: 3px solid #000; border-radius: 10px;
+  box-shadow: 3px 4px 0 var(--berry);
+  background: #fff;
+}
 .mascot:active { transform: scale(.95); }
 .mascot__bubble {
   position: absolute; bottom: 100%; right: 0; margin-bottom: 8px;
