@@ -2,9 +2,21 @@
    FX  —  CRT, scanlines, glitch type, marquee, boot screen
    ============================================================ */
 
+/* background video — cropped top & bottom so only the screen shows */
+:root { --bg-crop: 16%; }   /* how much of top+bottom to chop off */
+.desktop-bg {
+  position: fixed; left: 0; width: 100%;
+  top: calc(var(--bg-crop) * -1);
+  height: calc(100% + var(--bg-crop) * 2);
+  object-fit: cover; object-position: center;
+  z-index: 0; pointer-events: none;
+  /* fallback color if the video can't load */
+  background: #1a0030;
+}
+
 #fx-bg {
   position: fixed; inset: 0; z-index: 0;
-  display: block;
+  display: block; pointer-events: none;
 }
 
 /* ---------- CRT OVERLAY ---------- */
@@ -121,30 +133,34 @@
   justify-content: center; align-items: center; text-align: center;
 }
 
-/* ---------- MARQUEE ---------- */
-.marquee {
-  position: absolute; top: 50%; left: 0; right: 0;
-  transform: translateY(-50%) rotate(-4deg);
-  overflow: hidden;
-  z-index: 1; pointer-events: none;
-  opacity: .9;
+/* ---------- FLOATING BANNER FIELD (across the bg video) ---------- */
+.bg-banners {
+  position: absolute; inset: 0;
+  overflow: hidden; pointer-events: none;
+  z-index: 1;                 /* over the video, under icons/windows */
+  transform: rotate(-4deg) scale(1.15);
+  mix-blend-mode: screen;
 }
-.marquee__track {
+.bg-row {
+  position: absolute; left: 0; right: 0; white-space: nowrap;
+}
+.bg-row__track {
   display: inline-flex; white-space: nowrap;
   font-weight: 900; font-style: italic;
-  font-size: clamp(40px, 12vw, 150px);
   -webkit-text-stroke: 2px #000;
   color: var(--pine);
-  text-shadow: 6px 6px 0 var(--punch);
+  text-shadow: 4px 4px 0 var(--punch);
   animation: scroll-x 18s linear infinite;
+  will-change: transform;
 }
-.marquee__track span { padding: 0 .4em; }
+.bg-row.rev .bg-row__track { animation-direction: reverse; color: var(--cyan); text-shadow: 4px 4px 0 var(--berry); }
+.bg-row__track span { padding: 0 .35em; }
 @keyframes scroll-x {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .marquee__track { animation: none; }
+  .bg-row__track { animation-duration: 60s !important; }
 }
 
 /* ---------- GLITCH TEXT (utility) ---------- */
@@ -210,6 +226,7 @@
 .version-badge__v   { color: #fff; }
 .version-badge__num { color: var(--pine); font-size: 14px; }
 .version-badge__b   { color: var(--punch); }
+.version-badge__sha { color: var(--cyan); }
 @keyframes vb-blink { 50% { box-shadow: 0 0 20px rgba(182,255,0,1); } }
 .version-pop {
   position: absolute; right: 6px; top: 100%; margin-top: 2px;

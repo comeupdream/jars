@@ -92,9 +92,23 @@
   }
 
   function renderMarquee() {
-    const track = $("#marquee-track");
-    const phrase = C.marquee.map((m) => `<span>${m} ✦</span>`).join("");
-    track.innerHTML = phrase + phrase; // double for seamless loop
+    const host = $("#bg-banners");
+    if (!host) return;
+    host.innerHTML = "";
+    const phrases = C.marquee;
+    const ROWS = 7;
+    for (let r = 0; r < ROWS; r++) {
+      const row = el("div", "bg-row" + (r % 2 ? " rev" : ""));
+      let line = "";
+      for (let k = 0; k < 6; k++) line += `<span>${phrases[(k + r) % phrases.length]} ✦ </span>`;
+      const track = el("div", "bg-row__track", line + line); // double for seamless loop
+      row.style.top = 4 + r * 13 + "%";
+      track.style.animationDuration = 16 + (r % 3) * 7 + "s";
+      track.style.fontSize = `clamp(26px, ${6 + (r % 3) * 2}vw, ${64 + (r % 3) * 26}px)`;
+      track.style.opacity = r % 2 ? ".22" : ".32";
+      row.appendChild(track);
+      host.appendChild(row);
+    }
   }
 
   /* ---------------- START MENU ---------------- */

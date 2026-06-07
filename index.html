@@ -13,7 +13,12 @@
 </head>
 <body>
 
-  <!-- ===== PROCEDURAL FX (canvas, behind everything) ===== -->
+  <!-- ===== BACKGROUND VIDEO (cropped top/bottom, replaces bubbles) ===== -->
+  <video id="desktop-bg" class="desktop-bg" autoplay loop muted playsinline aria-hidden="true">
+    <source src="assets/desktop-bg.mp4" type="video/mp4" />
+  </video>
+
+  <!-- ===== PROCEDURAL FX (transparent overlay for click bursts) ===== -->
   <canvas id="fx-bg" aria-hidden="true"></canvas>
 
   <!-- ===== BOOT / POST SCREEN ===== -->
@@ -49,10 +54,8 @@
   <main id="desktop" class="desktop" hidden>
     <div id="desktop-icons" class="desktop-icons"></div>
 
-    <!-- giant looping hype marquee -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track" id="marquee-track"></div>
-    </div>
+    <!-- all the banner text floating across the background -->
+    <div class="bg-banners" id="bg-banners" aria-hidden="true"></div>
 
     <!-- windows get injected here -->
     <div id="window-layer" class="window-layer"></div>
@@ -86,6 +89,7 @@
          onerror="this.onerror=null;this.src='assets/koolaid-man.svg'" />
   </div>
 
+  <script src="js/buildinfo.js"></script>
   <script src="js/version.js"></script>
   <script src="js/fx.js"></script>
   <script src="js/content.js"></script>

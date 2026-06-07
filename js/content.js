@@ -24,10 +24,10 @@ window.JARS_CONTENT = {
   ],
 
   marquee: [
-    "IT'S JUST PINEAPPLE",
-    "IN KOOLAID",
-    "IN A JAR",
+    "KOOL-AID IN A JAR",
     "EVERY FLAVOR",
+    "IT'S JUST PINEAPPLE",
+    "IN A JAR",
     "OH YEAH",
   ],
 
