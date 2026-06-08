@@ -35,8 +35,8 @@ window.JARS_CONTENT = {
   // JARSAMP playlist — drop mp3s in assets/music/ and list them here.
   // Use tools/yt2mp3 to make mp3s (audio you own / are licensed to use).
   music: [
-    // { title: "Track Name — Artist", src: "assets/music/track1.mp3" },
-    // { title: "Another One",          src: "assets/music/track2.mp3" },
+    { title: "Aphex Twin — Windowlicker", src: "assets/music/Aphex Twin - Window Licker.mp3" },
+    { title: "Vitas — The 7th Element", src: "assets/music/Vitas - The 7th Element.mp3" },
   ],
 
   // ALL the kool-aid flavors on full display. Clicking one re-themes the OS.
