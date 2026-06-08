@@ -32,6 +32,13 @@ window.JARS_CONTENT = {
     "OH YEAH",
   ],
 
+  // JARSAMP playlist — drop mp3s in assets/music/ and list them here.
+  // Use tools/yt2mp3 to make mp3s (audio you own / are licensed to use).
+  music: [
+    // { title: "Track Name — Artist", src: "assets/music/track1.mp3" },
+    // { title: "Another One",          src: "assets/music/track2.mp3" },
+  ],
+
   // ALL the kool-aid flavors on full display. Clicking one re-themes the OS.
   flavors: [
     { name: "Tropical Punch", c: "#ff2d55" },
@@ -55,6 +62,7 @@ window.JARS_CONTENT = {
     { id: "sweeper",  glyph: "💣", label: "Jarsweeper" },
     { id: "doom",     glyph: "🔫", label: "DOOMAID.exe" },
     { id: "gallery",  glyph: "🖼️", label: "gallery" },
+    { id: "player",   glyph: "🎵", label: "JARSAMP" },
     { id: "cursors",  glyph: "🖱️", label: "Custom Cursor" },
     { id: "secret",   glyph: "🚫", label: "do_not_open" },
   ],
@@ -65,6 +73,7 @@ window.JARS_CONTENT = {
     { gl: "🌈", label: "Flavors", open: "flavors" },
     { gl: "ℹ️", label: "Info", open: "info" },
     { gl: "🖼️", label: "Gallery", open: "gallery" },
+    { gl: "🎵", label: "JARSAMP (music)", open: "player" },
     { gl: "🖱️", label: "Custom Cursor", open: "cursors" },
     { sep: true },
     { gl: "💣", label: "Jarsweeper", open: "sweeper" },
@@ -173,6 +182,27 @@ window.JARS_CONTENT = {
           style="width:100%;background:#000;border:2px solid #000;image-rendering:pixelated;cursor:crosshair"></canvas>
         <p style="font-size:12px;margin-top:6px">jars: <b id="doom-jars">0</b> · hp: <b id="doom-hp">100</b></p>`,
       onOpen: "initDoom",
+    },
+
+    player: {
+      title: "JARSAMP — Music", icon: "🎵", x: 200, y: 120, w: 320,
+      body: `
+        <div class="amp">
+          <div class="amp__screen sunken">
+            <canvas id="amp-viz" class="amp__viz" width="280" height="38"></canvas>
+            <div id="amp-title" class="amp__title">— no track —</div>
+            <div id="amp-time" class="amp__time">0:00 / 0:00</div>
+          </div>
+          <input id="amp-seek" class="amp__seek" type="range" min="0" max="100" value="0" />
+          <div class="amp__row">
+            <button class="win__btn amp__btn" id="amp-prev">⏮</button>
+            <button class="win__btn amp__btn" id="amp-play">▶</button>
+            <button class="win__btn amp__btn" id="amp-next">⏭</button>
+            <span class="amp__vol-wrap">🔊 <input id="amp-vol" class="amp__vol" type="range" min="0" max="1" step="0.01" value="0.8" /></span>
+          </div>
+          <ul id="amp-list" class="amp__list sunken"></ul>
+        </div>`,
+      onOpen: "initPlayer",
     },
 
     cursors: {
