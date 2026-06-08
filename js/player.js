@@ -45,6 +45,32 @@
     if (play) a.play().catch(function () {});
   }
 
+  // Autoplay the first track ASAP. If the browser blocks autoplay-with-sound,
+  // start on the very first user gesture. (We deliberately DON'T wire the
+  // WebAudio analyser here — routing through a suspended AudioContext would
+  // make it silent; the analyser gets set up later on a real control click.)
+  function autostart() {
+    if (G.autostarted) return;
+    G.autostarted = true;
+    var t = tracks(); if (!t.length) return;
+    var a = ensureAudio();
+    if (!a.src) { G.idx = 0; a.src = t[0].src; }
+    var attempt = a.play();
+    if (attempt && attempt.catch) {
+      attempt.catch(function () {
+        var evs = ["pointerdown", "keydown", "touchstart", "click"];
+        var once = function () {
+          a.play().catch(function () {});
+          if (G.ctx && G.ctx.state === "suspended") G.ctx.resume();
+          evs.forEach(function (ev) { document.removeEventListener(ev, once, true); });
+        };
+        evs.forEach(function (ev) { document.addEventListener(ev, once, true); });
+      });
+    }
+  }
+  if (document.readyState !== "loading") autostart();
+  else document.addEventListener("DOMContentLoaded", autostart);
+
   function initPlayer(win) {
     var a = ensureAudio();
     var t = tracks();
